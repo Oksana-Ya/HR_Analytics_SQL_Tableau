@@ -3,10 +3,7 @@
 
 This repository contains a collection of SQL queries and scripts for analyzing HR (Human Resources) data using SQL Server Management Studio. The dataset used for analysis is provided within this repository. The queries employ various SQL techniques, including Common Table Expressions (CTEs), UNION clauses, and aggregation functions to derive insights from the HR data.
 
-## Tableau Dashboard
-You can also explore the visual representation of the HR data analysis through the Tableau Dashboard available at the following link:
 
-Tableau Dashboard Link: [HR Analytics Dashboard on Tableau](https://public.tableau.com/app/profile/oksana.hudson/viz/HRAnalyticsDashboard_16955239598220/Dashboard1)
 
 ## Repository Contents
 This repository includes the following components:
@@ -27,7 +24,6 @@ Load the HR Dataset: The provided HR dataset is ready for use. You can load it i
 
 Execute SQL Queries: Open the SQL files in SQL Server Management Studio and execute the queries to explore and analyze the HR data.
 
-Explore Tableau Dashboard: For a visual representation of the HR data analysis, visit the Tableau Dashboard linked above.
 
 ## SQL Techniques Used
 The SQL queries in this repository employ various SQL techniques and functions, including:
