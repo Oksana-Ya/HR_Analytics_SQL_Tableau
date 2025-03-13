@@ -11,7 +11,6 @@ FROM MaritalStatusGenderCount
 ORDER BY number DESC;
 
 
-
 --Count of Employees by Attrition and show total number of all employees
 WITH AttritionCounts AS (
     SELECT COUNT(*) AS Attrition_number
