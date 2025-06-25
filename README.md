@@ -31,23 +31,17 @@ Run the queries in hr_attrition_analysis.sql.
 
 
 **📊 Key Analyses**
-Overall attrition rate
 
-Attrition by department and job role
-
-Tenure impact on attrition
-
-Satisfaction and work-life balance analysis
-
-Top 5 roles with highest attrition
-
-Most common education field among high earners
+- Overall attrition rate
+- Attrition by department and job role
+- Tenure impact on attrition
+- Satisfaction and work-life balance analysis
+- Top 5 roles with highest attrition
+- Most common education field among high earners
 
 **SQL Features Used**
-CASE WHEN for conditional aggregation
 
-WITH (CTEs) for modular queries
-
-ROW_NUMBER() for ranking
-
-PERCENTILE_CONT() for income analysis
+- CASE WHEN for conditional aggregation
+- WITH (CTEs) for modular queries
+- ROW_NUMBER() for ranking
+- PERCENTILE_CONT() for income analysis
