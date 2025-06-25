@@ -21,12 +21,16 @@ This project explores employee attrition trends using SQL and a structured HR da
 COPY hr_data
 FROM '/absolute/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv'
 DELIMITER ','
-CSV HEADER;```
-📌 Replace /absolute/path/to/... with the actual path to the file on your machine.
+CSV HEADER;
+```
+
+Replace /absolute/path/to/... with the actual path to the file on your machine.
+
 
 Run the queries in hr_attrition_analysis.sql.
 
-📊 Key Analyses
+
+**📊 Key Analyses**
 Overall attrition rate
 
 Attrition by department and job role
@@ -39,7 +43,7 @@ Top 5 roles with highest attrition
 
 Most common education field among high earners
 
-🛠 SQL Features Used
+**SQL Features Used**
 CASE WHEN for conditional aggregation
 
 WITH (CTEs) for modular queries
