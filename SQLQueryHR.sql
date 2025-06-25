@@ -1,112 +1,176 @@
--- Show amount of employees based on their marital status grouped by gender
-WITH MaritalStatusGenderCount AS (
-    SELECT MaritalStatus, Gender, COUNT(*) AS number
-    FROM hr_data
-    GROUP BY MaritalStatus, Gender
-)
-SELECT MaritalStatus, Gender, number
-FROM MaritalStatusGenderCount
-ORDER BY number DESC;
+DROP TABLE IF EXISTS hr_data;
+
+CREATE TABLE hr_data (
+    age INTEGER,
+    attrition VARCHAR(10),
+    business_travel VARCHAR(50),
+    daily_rate INTEGER,
+    department VARCHAR(50),
+    distance_from_home INTEGER,
+    education INTEGER,
+    education_field VARCHAR(50),
+    employee_count INTEGER,
+    employee_number INTEGER PRIMARY KEY,
+    environment_satisfaction INTEGER,
+    gender VARCHAR(10),
+    hourly_rate INTEGER,
+    job_involvement INTEGER,
+    job_level INTEGER,
+    job_role VARCHAR(50),
+    job_satisfaction INTEGER,
+    marital_status VARCHAR(20),
+    monthly_income INTEGER,
+    monthly_rate INTEGER,
+    num_companies_worked INTEGER,
+    over_18 VARCHAR(2),
+    overtime VARCHAR(5),
+    percent_salary_hike INTEGER,
+    performance_rating INTEGER,
+    relationship_satisfaction INTEGER,
+    standard_hours INTEGER,
+    stock_option_level INTEGER,
+    total_working_years INTEGER,
+    training_times_last_year INTEGER,
+    work_life_balance INTEGER,
+    years_at_company INTEGER,
+    years_in_current_role INTEGER,
+    years_since_last_promotion INTEGER,
+    years_with_curr_manager INTEGER
+);
 
 
--- Count of Employees by Attrition and show total number of all employees
-WITH AttritionCounts AS (
-    SELECT COUNT(*) AS Attrition_number
-    FROM hr_data
-    WHERE Attrition = 'Yes'
-)
-SELECT 'Attrition' AS Category, Attrition_number AS Count FROM AttritionCounts
-UNION ALL
-SELECT 'ActiveEmployees' AS Category, (SELECT COUNT(*) FROM hr_data) - Attrition_number FROM AttritionCounts
-UNION ALL
-SELECT 'Total' AS Category, COUNT(*) FROM hr_data
-ORDER BY Category;  -- Explicit order added
+
+-- Load data into the hr_data table from a CSV file
+-- The file must be accessible to the PostgreSQL server (on the server's filesystem)
+
+COPY hr_data
+FROM '/path/to/your/data/WA_Fn-UseC_-HR-Employee-Attrition.csv'  -- Replace this with the actual absolute path to your CSV file
+DELIMITER ','        -- Use comma as the field delimiter (standard for CSV)
+CSV HEADER;          -- The first row contains column names, so skip it during import
 
 
--- Calculate average age of all employees
-SELECT ROUND(AVG(Age), 2) AS AverageAge FROM hr_data;
 
 
--- Calculate attrition by each department
-SELECT Department,
-    SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS AttritionCount,
-    COUNT(*) AS TotalEmployees
-FROM hr_data
-GROUP BY Department
-ORDER BY AttritionCount DESC;
 
 
--- Count attrition by salary range
+
+-- 1. Overall Attrition Rate
 SELECT 
-    CASE 
-        WHEN MonthlyIncome <= 3000 THEN 'Low'
-        WHEN MonthlyIncome <= 6000 THEN 'Medium'
-        ELSE 'High'
-    END AS SalaryRange,
-    SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS AttritionCount,
-    COUNT(*) AS TotalEmployees
+    COUNT(*) AS total_employees,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
+FROM hr_data;
+
+-- 2. Attrition by Department
+SELECT 
+    department,
+    COUNT(*) AS total_employees,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-GROUP BY 1  -- Using positional GROUP BY instead of alias
-ORDER BY AttritionCount DESC;
+GROUP BY department
+ORDER BY attrition_rate DESC;
 
-
--- Active employee count by department
-SELECT Department, COUNT(*) AS Count
+-- 3. Attrition by Job Role
+SELECT 
+    job_role,
+    COUNT(*) AS total_employees,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-WHERE Attrition = 'No'
-GROUP BY Department;
+GROUP BY job_role
+ORDER BY attrition_rate DESC;
 
 
--- Average Years at Company by Job Role
-SELECT JobRole, ROUND(AVG(YearsAtCompany), 2) AS AvgYearsAtCompany
+
+-- 4. Years at Company vs. Attrition
+SELECT 
+    years_at_company,
+    COUNT(*) AS total,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-GROUP BY JobRole
-ORDER BY AvgYearsAtCompany DESC;
+GROUP BY years_at_company
+ORDER BY years_at_company;
 
-
--- Find Employee with the highest salary
-SELECT EmployeeNumber, Department, JobRole, MonthlyIncome
+-- 5. Total Working Years vs. Attrition
+SELECT 
+    total_working_years,
+    COUNT(*) AS total,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-WHERE MonthlyIncome = (SELECT MAX(MonthlyIncome) FROM hr_data);
+GROUP BY total_working_years
+ORDER BY total_working_years;
 
 
--- Count of Employees by Marital Status and Gender
-SELECT MaritalStatus, Gender, COUNT(*) AS Count
+
+-- 6. Job Satisfaction vs. Attrition
+SELECT 
+    job_satisfaction,
+    COUNT(*) AS total,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-GROUP BY MaritalStatus, Gender;
+GROUP BY job_satisfaction;
 
-
--- Analyze the average salary based on education level and education field
-SELECT Education, EducationField, ROUND(AVG(MonthlyIncome), 2) AS AvgMonthlySalary
+-- 7. Environment Satisfaction vs. Attrition
+SELECT 
+    environment_satisfaction,
+    COUNT(*) AS total,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-GROUP BY Education, EducationField
-ORDER BY AvgMonthlySalary DESC;
+GROUP BY environment_satisfaction;
 
-
--- Calculate the average age of employees in each job role
-SELECT JobRole, ROUND(AVG(Age), 2) AS AvgAge
+-- 8. Work-Life Balance vs. Attrition
+SELECT 
+    work_life_balance,
+    COUNT(*) AS total,
+    SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS left,
+    ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data
-GROUP BY JobRole
-ORDER BY AvgAge DESC;
+GROUP BY work_life_balance;
+
+-- 9. Top 5 Job Roles with Highest Attrition Rate
+WITH job_attrition AS (
+    SELECT 
+        job_role,
+        COUNT(*) AS total,
+        SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS left,
+        ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
+    FROM hr_data
+    GROUP BY job_role
+)
+SELECT *
+FROM (
+    SELECT *, ROW_NUMBER() OVER (ORDER BY attrition_rate DESC) AS rank
+    FROM job_attrition
+) ranked
+WHERE rank <= 5;
 
 
--- Show only those employees whose monthly salary is higher than the average salary for their job role
-SELECT EmployeeNumber, JobRole, MonthlyIncome
-FROM hr_data h1
-WHERE MonthlyIncome > (SELECT AVG(MonthlyIncome) FROM hr_data h2 WHERE h1.JobRole = h2.JobRole)
-ORDER BY JobRole, MonthlyIncome DESC;
 
+-- 10.  Average Years at Company by Department for Employees Who Left
+WITH left_employees AS (
+    SELECT department, years_at_company
+    FROM hr_data
+    WHERE attrition = 'Yes'
+)
+SELECT 
+    department,
+    ROUND(AVG(years_at_company), 2) AS avg_years_before_leaving
+FROM left_employees
+GROUP BY department
+ORDER BY avg_years_before_leaving DESC;
 
--- Show top 5 employees who work at the company the longest period of time
-SELECT EmployeeNumber, JobRole, MonthlyIncome, YearsAtCompany
+-- 11. Most Common Education Field Among High Earners
+SELECT education_field, COUNT(*) AS count
 FROM hr_data
-ORDER BY YearsAtCompany DESC
-LIMIT 5;
-
-
--- Show employees who got a salary increase by 20% or more
-SELECT EmployeeNumber, JobRole, PercentSalaryHike
-FROM hr_data
-WHERE PercentSalaryHike >= 20
-ORDER BY PercentSalaryHike DESC;
-
+WHERE monthly_income > (
+    SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY monthly_income)
+    FROM hr_data
+)
+GROUP BY education_field
+ORDER BY count DESC
+LIMIT 1;
