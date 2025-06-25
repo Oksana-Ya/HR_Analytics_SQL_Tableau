@@ -1,28 +1,54 @@
-# SQLProject_HR_Analytics
-# HR Analytics SQL Queries
+# HR Employee Attrition Analysis (SQL Project)
 
-This repository contains PostgreSQL queries for analyzing HR data. The dataset is included, and queries use CTEs, UNION, window functions, and aggregation to extract insights.
+This project explores employee attrition trends using SQL and a structured HR dataset. It helps uncover patterns in departments, roles, and employee satisfaction that influence turnover.
 
-## 📂 Contents
-SQL Queries – Organized into separate files for specific HR analyses.
-HR Dataset – Provided for easy replication of queries.
+---
 
-## Getting Started
-Clone the repo and set up PostgreSQL (e.g., pgAdmin or psql).
-Load the dataset using COPY or another import method.
-Run queries in your PostgreSQL environment.
+## Dataset
 
-## SQL Techniques
-CTEs & Subqueries – Simplify complex queries.
-UNION & Aggregation – Combine and summarize data.
-Window Functions – Advanced analytics (e.g., rankings, averages).
+- Source: [Oksana-Ya/SQLProject_HR_Analytics](https://github.com/Oksana-Ya/SQLProject_HR_Analytics/blob/main/WA_Fn-UseC_-HR-Employee-Attrition.csv)
+- Data includes demographics, job roles, compensation, satisfaction scores, and attrition status.
 
-## 📊 Example Analyses
-Employee turnover & tenure
-Salary distribution & increases
-Departmental & job role insights
-Attrition by salary range
-Employee demographics & performance
+---
+
+## Setup
+
+1. Install PostgreSQL.
+2. Clone this repo and download the dataset.
+3. Load data with:
+
+```sql
+COPY hr_data
+FROM '/absolute/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv'
+DELIMITER ','
+CSV HEADER;
+
+4. Run the queries in hr_attrition_analysis.sql
 
 
-Each query helps derive key workforce insights for data-driven decisions. 
+
+__Key Analyses__
+
+Overall attrition rate
+
+Attrition by department and job role
+
+Tenure impact on attrition
+
+Satisfaction and work-life balance analysis
+
+Top 5 roles with highest attrition
+
+Most common education field among high earners
+
+
+** SQL Features Used **
+CASE WHEN for conditional aggregation
+
+WITH (CTEs) for modular queries
+
+ROW_NUMBER() for ranking
+
+PERCENTILE_CONT() for income analysis
+
+
