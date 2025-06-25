@@ -4,7 +4,7 @@ This project explores employee attrition trends using SQL and a structured HR da
 
 ---
 
-## 📁 Dataset
+## Dataset
 
 - Source: [Oksana-Ya/SQLProject_HR_Analytics](https://github.com/Oksana-Ya/SQLProject_HR_Analytics/blob/main/WA_Fn-UseC_-HR-Employee-Attrition.csv)
 - Data includes demographics, job roles, compensation, satisfaction scores, and attrition status.
@@ -26,11 +26,11 @@ CSV HEADER;
 
 Replace /absolute/path/to/... with the actual path to the file on your machine.
 
+4. Run the queries in hr_attrition_analysis.sql.
 
-Run the queries in hr_attrition_analysis.sql.
 
 
-**📊 Key Analyses**
+## Key Analyses
 
 - Overall attrition rate
 - Attrition by department and job role
@@ -39,7 +39,7 @@ Run the queries in hr_attrition_analysis.sql.
 - Top 5 roles with highest attrition
 - Most common education field among high earners
 
-**SQL Features Used**
+## SQL Features Used
 
 - CASE WHEN for conditional aggregation
 - WITH (CTEs) for modular queries
