@@ -1,17 +1,17 @@
-# HR Employee Attrition Analysis (SQL Project)
+#  HR Employee Attrition Analysis (SQL Project)
 
 This project explores employee attrition trends using SQL and a structured HR dataset. It helps uncover patterns in departments, roles, and employee satisfaction that influence turnover.
 
 ---
 
-## Dataset
+## 📁 Dataset
 
 - Source: [Oksana-Ya/SQLProject_HR_Analytics](https://github.com/Oksana-Ya/SQLProject_HR_Analytics/blob/main/WA_Fn-UseC_-HR-Employee-Attrition.csv)
 - Data includes demographics, job roles, compensation, satisfaction scores, and attrition status.
 
 ---
 
-## Setup
+## ⚙️ Setup
 
 1. Install PostgreSQL.
 2. Clone this repo and download the dataset.
@@ -23,12 +23,9 @@ FROM '/absolute/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv'
 DELIMITER ','
 CSV HEADER;
 
-4. Run the queries in hr_attrition_analysis.sql
+Run the queries in hr_attrition_analysis.sql.
 
-
-
-__Key Analyses__
-
+📊 Key Analyses
 Overall attrition rate
 
 Attrition by department and job role
@@ -41,8 +38,7 @@ Top 5 roles with highest attrition
 
 Most common education field among high earners
 
-
-** SQL Features Used **
+🛠 SQL Features Used
 CASE WHEN for conditional aggregation
 
 WITH (CTEs) for modular queries
@@ -50,5 +46,3 @@ WITH (CTEs) for modular queries
 ROW_NUMBER() for ranking
 
 PERCENTILE_CONT() for income analysis
-
-
