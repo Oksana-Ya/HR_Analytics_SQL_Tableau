@@ -22,6 +22,7 @@ COPY hr_data
 FROM '/absolute/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv'
 DELIMITER ','
 CSV HEADER;
+Replace /absolute/path/to/... with the actual path to the file on your machine.
 
 Run the queries in hr_attrition_analysis.sql.
 
