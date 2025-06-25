@@ -21,7 +21,7 @@ This project explores employee attrition trends using SQL and a structured HR da
 COPY hr_data
 FROM '/absolute/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv'
 DELIMITER ','
-CSV HEADER;
+CSV HEADER;```
 📌 Replace /absolute/path/to/... with the actual path to the file on your machine.
 
 Run the queries in hr_attrition_analysis.sql.
