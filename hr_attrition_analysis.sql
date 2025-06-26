@@ -40,14 +40,11 @@ CREATE TABLE hr_data (
     years_with_curr_manager INTEGER
 );
 
--- Load data (update path for your environment)
-COPY hr_data
-FROM '/absolute/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv'
-DELIMITER ','
-CSV HEADER;
+
+
 
 ----------------------------------------------------------
--- 📊 HR Attrition Analysis Queries
+-- HR Attrition Analysis Queries
 ----------------------------------------------------------
 
 -- 1. Overall Attrition Rate
