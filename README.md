@@ -1,6 +1,8 @@
 #  HR Employee Attrition Analysis (SQL Project)
 
-This project explores employee attrition trends using SQL and a structured HR dataset. It helps uncover patterns in departments, roles, and employee satisfaction that influence turnover.
+This project explores employee attrition patterns using SQL within pgAdmin 4, leveraging a structured HR dataset to identify trends across departments, roles, tenure, and employee satisfaction.
+
+
 
 ---
 
@@ -13,9 +15,9 @@ This project explores employee attrition trends using SQL and a structured HR da
 
 ## ⚙️ Setup
 
-1. Install PostgreSQL.
-2. Clone this repo and download the dataset.
-3. Load data with:
+1. Install PostgreSQL and pgAdmin 4.
+2. Clone the repository and download the dataset.
+3. Load the data into pgAdmin 4 by executing the following SQL in the Query Tool:
 
 ```sql
 COPY hr_data
@@ -26,7 +28,9 @@ CSV HEADER;
 
 Replace /absolute/path/to/... with the actual path to the file on your machine.
 
-4. Run the queries in hr_attrition_analysis.sql.
+4. All SQL queries and analysis were performed directly in pgAdmin 4 using the built-in query editor.
+
+5. Run analysis scripts from hr_attrition_analysis.sql inside pgAdmin 4.
 
 
 
