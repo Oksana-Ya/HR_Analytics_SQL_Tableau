@@ -1,18 +1,12 @@
-I've created an interactive Tableau dashboard that explores employee attrition through key HR metrics. This visualization helps uncover patterns and insights about why employees leave, allowing HR teams and managers to make data-informed decisions.
+# 📊 HR Attrition Analysis Dashboard
 
-🔗 [View the Attrition Analysis Dashboard](https://public.tableau.com/app/profile/oksana.h/viz/HumanResources-AttritionAnalysis/Dashboard1#1)
+This is an interactive Tableau dashboard analyzing employee attrition based on various HR factors like department, job role, satisfaction, and overtime.
 
-💡 Dashboard Highlights
-Attrition Breakdown: Filter by department, age group, education level, and more.
+🔗 [View the Dashboard on Tableau Public](https://public.tableau.com/app/profile/oksana.h/viz/HumanResources-AttritionAnalysis/Dashboard1#1)
 
-Key Metrics Tracked: Job satisfaction, overtime, years at company, and other influential factors.
+### Features:
+- Filter by department, job role, education, and more
+- Explore attrition trends and key influencing factors
+- Built entirely in Tableau Public
 
-Interactive Visuals: Hover and filter for deeper insights into the dataset.
-
-🛠️ Tools Used
-Tableau Public for visualization
-
-HR Dataset sourced from [Kaggle/IBM (or specify if custom)]
-
-Data cleaning and prep done using Tableau’s built-in tools
-
+Feel free to explore and share!
