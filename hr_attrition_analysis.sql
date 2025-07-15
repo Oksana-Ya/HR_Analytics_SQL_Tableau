@@ -47,14 +47,15 @@ CREATE TABLE hr_data (
 -- HR Attrition Analysis Queries
 ----------------------------------------------------------
 
--- 1. Overall Attrition Rate
+-- Overall Attrition Rate
 SELECT 
     COUNT(*) AS total_employees,
     SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
     ROUND(100.0 * SUM(CASE WHEN attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate
 FROM hr_data;
 
--- 2. Attrition by Department
+    
+-- Attrition by Department
 SELECT 
     department,
     COUNT(*) AS total_employees,
@@ -64,7 +65,7 @@ FROM hr_data
 GROUP BY department
 ORDER BY attrition_rate DESC;
 
--- 3. Attrition by Job Role
+-- Attrition by Job Role
 SELECT 
     job_role,
     COUNT(*) AS total_employees,
@@ -74,7 +75,7 @@ FROM hr_data
 GROUP BY job_role
 ORDER BY attrition_rate DESC;
 
--- 4. Attrition by Years at Company
+-- Attrition by Years at Company
 SELECT 
     years_at_company,
     COUNT(*) AS total_employees,
@@ -84,7 +85,7 @@ FROM hr_data
 GROUP BY years_at_company
 ORDER BY years_at_company;
 
--- 5. Attrition by Total Working Years
+-- Attrition by Total Working Years
 SELECT 
     total_working_years,
     COUNT(*) AS total_employees,
@@ -94,7 +95,7 @@ FROM hr_data
 GROUP BY total_working_years
 ORDER BY total_working_years;
 
--- 6. Attrition by Job Satisfaction
+-- Attrition by Job Satisfaction
 SELECT 
     job_satisfaction,
     COUNT(*) AS total_employees,
@@ -104,7 +105,7 @@ FROM hr_data
 GROUP BY job_satisfaction
 ORDER BY job_satisfaction;
 
--- 7. Attrition by Environment Satisfaction
+-- Attrition by Environment Satisfaction
 SELECT 
     environment_satisfaction,
     COUNT(*) AS total_employees,
@@ -114,7 +115,7 @@ FROM hr_data
 GROUP BY environment_satisfaction
 ORDER BY environment_satisfaction;
 
--- 8. Attrition by Work-Life Balance
+-- Attrition by Work-Life Balance
 SELECT 
     work_life_balance,
     COUNT(*) AS total_employees,
@@ -124,7 +125,7 @@ FROM hr_data
 GROUP BY work_life_balance
 ORDER BY work_life_balance;
 
--- 9. Top 5 Job Roles with Highest Attrition Rate
+-- Top 5 Job Roles with Highest Attrition Rate
 WITH job_attrition AS (
     SELECT 
         job_role,
@@ -142,7 +143,7 @@ FROM (
 ) ranked
 WHERE rank <= 5;
 
--- 10. Average Years at Company by Department for Employees Who Left
+-- Average Years at Company by Department for Employees Who Left
 SELECT 
     department,
     ROUND(AVG(years_at_company), 2) AS avg_years_before_leaving
