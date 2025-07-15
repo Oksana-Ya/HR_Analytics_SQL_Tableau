@@ -3,6 +3,18 @@
 This project explores employee attrition patterns using SQL within pgAdmin 4, leveraging a structured HR dataset to identify trends across departments, roles, tenure, and employee satisfaction.
 
 
+---
+
+## 📈 Tableau Visualization
+
+For a visual, interactive exploration of the findings, check out the Tableau dashboard:
+
+🔗 [View the HR Attrition Dashboard on Tableau Public](https://public.tableau.com/app/profile/oksana.h/viz/HumanResources-AttritionAnalysis/Dashboard1#1)
+
+Features:
+- Filters by department, education, job role, and more  
+- Visual breakdowns of attrition rates, satisfaction scores, and overtime impact  
+- Clean layout for quick insights and exploration
 
 ---
 
