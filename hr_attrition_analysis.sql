@@ -152,7 +152,7 @@ WHERE attrition = 'Yes'
 GROUP BY department
 ORDER BY avg_years_before_leaving DESC;
 
--- 11. Most Common Education Field Among High Earners (Top 25%)
+-- Most Common Education Field Among High Earners (Top 25%)
 SELECT education_field, COUNT(*) AS count
 FROM hr_data
 WHERE monthly_income > (
